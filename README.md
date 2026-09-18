@@ -1,3 +1,3 @@
-Name: Mac Prouty \n
-Class: CPSC224 Fall 2026 \n
+Name: Mac Prouty; 
+Class: CPSC224 Fall 2026; 
 Current assignment: HW1
