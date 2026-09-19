@@ -1,7 +1,7 @@
 // import java.util.Math;
 
 public class Dice {
-    private final int numSides;
+    private int numSides;
     private int sideUp;
 
     public Dice(){
@@ -9,7 +9,14 @@ public class Dice {
     }
 
     public Dice(int numSides){
-        this.numSides = numSides;
+        if (numSides < 1) {
+            System.out.println("Invalid number of sides.");
+            System.out.println("Sides set to 2.");
+            this.numSides = 2;
+        }
+        else {
+            this.numSides = numSides;
+        }
     }
 
     public int getSideUp() {
@@ -18,6 +25,10 @@ public class Dice {
 
     public int getNumSides() {
         return numSides;
+    }
+
+    public void setNumSides(int newNumSides) {
+        this.numSides = newNumSides;
     }
 
     public void roll() {
