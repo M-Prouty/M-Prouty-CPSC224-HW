@@ -1,11 +1,10 @@
-// import java.util.Math;
-
 public class Dice {
     private int numSides;
     private int sideUp;
 
     public Dice(){
         this.numSides = 6;
+        this.sideUp = (int) (Math.random() * numSides) + 1;
     }
 
     public Dice(int numSides){
@@ -17,6 +16,7 @@ public class Dice {
         else {
             this.numSides = numSides;
         }
+        this.sideUp = (int) (Math.random() * numSides) + 1;
     }
 
     public int getSideUp() {
