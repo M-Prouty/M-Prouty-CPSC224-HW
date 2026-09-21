@@ -37,6 +37,21 @@ public class Hand {
             diceNumberCount.set(num - 1, diceNumberCount.get(num - 1) + 1);
         }
         return diceNumberCount;
-        
+    }
+
+    public boolean isFarkle() {
+        boolean farkle = true;
+        List<Integer>sides = this.calcNumEachSide();
+        // if there's more than zero occurances of 1 or 5, it is not a farkle
+        if (sides.get(0) > 0 || sides.get(4) > 0) {
+            farkle = false;
+        }
+        // if there's 3 or more of one number, it is not a farkle
+        for(int i = 0; i < 6; i++ ) {
+            if(sides.get(i) >= 3) {
+                farkle = false;
+            }
+        }
+        return farkle;
     }
 }
