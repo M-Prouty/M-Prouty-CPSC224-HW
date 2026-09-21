@@ -52,6 +52,15 @@ public class Hand {
                 farkle = false;
             }
         }
+        int pairCount = 0;
+        for( int i = 1; i < 6; i++ ) {
+            if(sides.get(i) == 2) {
+                pairCount++;
+            }
+        }
+        if( pairCount == 3 ) {
+            farkle = false;
+        }
         return farkle;
     }
 }
