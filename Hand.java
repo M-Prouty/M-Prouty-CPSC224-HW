@@ -25,4 +25,18 @@ public class Hand {
         Collections.sort(sides);
         return sides;
     }
+
+    public List<Integer> calcNumEachSide(){
+        List<Integer> diceNumberCount = new ArrayList<>();
+        List<Integer> myHandSides = this.getListOfSides();
+        for (int i = 0; i < myHandSides.size(); i++) {
+            diceNumberCount.add(0);
+        }
+        for (int i = 0; i < 6; i++) {
+            int num = myHandSides.get(i);
+            diceNumberCount.set(num - 1, diceNumberCount.get(num - 1) + 1);
+        }
+        return diceNumberCount;
+        
+    }
 }
