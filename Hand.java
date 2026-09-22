@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Hand {
-    public List<Dice> listOfDice = new ArrayList<>();
+    private List<Dice> listOfDice = new ArrayList<>();
 
     public Hand(int numDice, int numSides) {
         // List<Dice> listOfDice = new ArrayList<>();
@@ -10,6 +10,10 @@ public class Hand {
             listOfDice.add(d);
             // System.out.println(d.getSideUp());
         }
+    }
+
+    public List<Dice> getListOfDice() {
+        return this.listOfDice;
     }
 
     public List<Integer> getListOfSides() {
