@@ -6,6 +6,8 @@ public class Farkle {
         Hand myHand = new Hand(6, 6);  
         List<Dice> allDice = myHand.getListOfDice();
         List<Dice> savedDice = new ArrayList<>();
-        
+        for (int i = 0; i < 100; i++) {
+            myHand.turn();
+        }
     }
 }

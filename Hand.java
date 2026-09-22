@@ -51,20 +51,93 @@ public class Hand {
             farkle = false;
         }
         // if there's 3 or more of one number, it is not a farkle
-        for(int i = 0; i < 6; i++ ) {
+        for(int i = 0; i < 6; i++) {
             if(sides.get(i) >= 3) {
                 farkle = false;
             }
         }
         int pairCount = 0;
-        for( int i = 1; i < 6; i++ ) {
+        for(int i = 1; i < 6; i++) {
             if(sides.get(i) == 2) {
                 pairCount++;
             }
         }
-        if( pairCount == 3 ) {
+        if(pairCount == 3) {
             farkle = false;
         }
         return farkle;
+    }
+
+    public void rollAll() {
+        for (int i = 0; i < listOfDice.size(); i++) {
+            listOfDice.get(i).roll();
+        }
+    }
+
+    public List<List<Integer>> getSaveable() {
+        List<List<Integer>> options = new ArrayList<>();
+        if (this.isFarkle()) {
+            assert true;
+        }
+        else {
+            List<Integer> nES = this.calcNumEachSide();
+            boolean straight = false;
+            boolean threePairs = false;
+            boolean triple = false;
+            boolean fourOfAKind = false;
+            boolean fiveOfAKind = false;
+            boolean sixOfAKind = false;
+            if(nES.contains(6)) {
+                sixOfAKind = true;
+                int numSix = nES.indexOf(6) + 1;
+                List<Integer> numSixList = List.of(numSix, numSix, numSix, numSix, numSix, numSix);
+                options.add(numSixList);
+            }
+            else if (this.calcNumEachSide().contains(5)) {
+                fiveOfAKind = true;
+                int numFive = nES.indexOf(5) + 1;
+                List<Integer> numFiveList = List.of(numFive, numFive, numFive, numFive, numFive);
+                options.add(numFiveList);
+            }
+            else if (this.calcNumEachSide().contains(4)) {
+                fourOfAKind = true;
+                int numFour = nES.indexOf(5) + 1;
+                List<Integer> numFourList = List.of(numFour, numFour, numFour, numFour);
+                options.add(numFourList);
+            }
+            else if (this.calcNumEachSide().contains(3)) {
+                triple = true; // need to check if it's two triples
+            }
+            else if (this.calcNumEachSide().contains(2)) {
+                // calc if it's three pairs
+            }
+            else {
+                straight = true;
+            }
+        }
+        return options;
+    }
+
+    public int calcPoints(List<Integer> listOfSides) {
+        return 1;
+    }
+
+    public boolean turn() {
+        this.rollAll();
+        // System.out.println("Here is your roll: " + this.getListOfSides());
+        if(this.isFarkle()) {
+            // System.out.println("You farkled. You gained no points this turn.");
+        }
+        else {
+            if (!this.getSaveable().isEmpty()) {
+                // System.out.println("Here is your roll: " + this.getListOfSides());
+                if(this.getSaveable().get(0).size() == 5) {
+                    System.out.println("Here is your roll: " + this.getListOfSides());
+                    System.out.println("Here are your options for dice to set aside: " + this.getSaveable());
+                }
+   
+            }
+        }
+        return true;
     }
 }
