@@ -23,6 +23,10 @@ public class Dice {
         return sideUp;
     }
 
+    public void setSideUp(int sideUp) {
+        this.sideUp = sideUp;
+    }
+
     public int getNumSides() {
         return numSides;
     }
