@@ -41,7 +41,7 @@ public class Hand {
     public List<Integer> calcNumEachSide(){
         List<Integer> diceNumberCount = new ArrayList<>();
         List<Integer> myHandSides = this.getListOfSides();
-        for (int i = 0; i < myHandSides.size(); i++) {
+        for (int _ : myHandSides) {
             diceNumberCount.add(0);
         }
         for (int i = 0; i < 6; i++) {
@@ -144,8 +144,6 @@ public class Hand {
                         else if (triple2 == 0) {
                             triple2 = i + 1;
                         }
-                        // System.out.println("TRIPLE1: " + triple1);
-                        // System.out.println("TRIPLE2: " + triple2);
                     }
                 }
                 if (tripleCount == 2) {
@@ -283,22 +281,44 @@ public class Hand {
         return sum;
     }
 
-    public boolean turn() {
+    public String getSaveableString() {
+        String saveableOptions = "";
+        List<Character> alphabet = List.of('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H');
+        List<List<Integer>> saveable = this.getSaveable();
+        for(int i = 0; i < saveable.size(); i++) {
+            saveableOptions += (alphabet.get(i)) + ". " + saveable.get(i) + "\n";
+        }
+        return saveableOptions;
+    }
+
+// returns the points scored
+    public void turn() {
         this.rollAll();
-        // System.out.println("Here is your roll: " + this.getListOfSides());
+        List<List<Integer>> savedDice = new ArrayList<>();
+        List<String> alphabet = List.of("A", "B", "C", "D", "E");
+        System.out.println("Here is your roll: " + this.getListOfSides());
         if(this.isFarkle()) {
-            // System.out.println("FARKLE FARKLE");
+            System.out.println("You farkled. You scored no points this round.");
         }
         else {
-            // if (!this.getSaveable().isEmpty()) {
-                System.out.println("Here is your roll: " + this.getListOfSides());
-                // if(this.getSaveable().get(0).size() == 6 && this.calcNumEachSide().contains(1)) {
-                //     System.out.println("Here is your roll: " + this.getListOfSides());
-                //     System.out.println("Here are your options for dice to set aside: " + this.getSaveable());
-                // }
-                System.out.println("Here are your options for dice to set aside: " + this.getSaveable());
-            // }
+            System.out.println("Here are your options for dice to set aside: ");
+            System.out.println(this.getSaveableString());
         }
-        return true;
+        Scanner input = new Scanner(System.in);
+        int answerCount = 0;
+        System.out.println("Which group of dice would you like to keep? Please type only one letter.");
+        String answer = input.nextLine().toUpperCase();
+        answerCount++;
+        savedDice.add(this.getSaveable().get(alphabet.indexOf(answer)));
+        while(answerCount < this.getSaveable().size() && !(answer.equals("-1"))) {
+            System.out.println("Would you like to save more? Enter a letter or -1 to stop. ");
+            answer = input.nextLine().toUpperCase();
+            answerCount++;
+            if (!(answer.equals("-1"))) {
+                savedDice.add(this.getSaveable().get(alphabet.indexOf(answer)));
+            }
+        }
+        int points = this.calcPoints(savedDice);
+        System.out.println("You earned " + points + " points!");
     }
-}
+} 
