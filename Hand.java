@@ -304,7 +304,7 @@ public class Hand {
             System.out.println("Here are your options for dice to set aside: ");
             System.out.println(this.getSaveableString());
         }
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in); 
         int answerCount = 0;
         System.out.println("Which group of dice would you like to keep? Please type only one letter.");
         String answer = input.nextLine().toUpperCase();
